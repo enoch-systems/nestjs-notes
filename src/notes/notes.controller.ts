@@ -1,4 +1,20 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
+import { NotesService } from './notes.service';
 
 @Controller('notes')
-export class NotesController {}
+export class NotesController {
+  constructor(private readonly notesService: NotesService) {}
+
+  @Post()
+  create(
+    @Body('title') title: string,
+    @Body('content') content: string,
+  ) {
+    return this.notesService.createNote(title, content);
+  }
+
+  @Get()
+  findAll() {
+    return this.notesService.getNotes();
+  }
+}
