@@ -6,19 +6,20 @@ export class NotesService {
   constructor(private prisma: PrismaService) {}
 
   async createNote(title: string, content: string) {
-    return this.prisma.note.create({
-      data: {
-        title,
-        content,
-      },
+    return this.prisma.client.note.create({
+      data: { title, content },
     });
   }
 
   async getNotes() {
-    return this.prisma.note.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
+    return this.prisma.client.note.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async getNoteById(id: string) {
+    return this.prisma.client.note.findUnique({
+      where: { id },
     });
   }
 }

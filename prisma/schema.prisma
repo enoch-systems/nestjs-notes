@@ -12,3 +12,4 @@ model Note {
   content   String
   createdAt DateTime @default(now())
 }
+
